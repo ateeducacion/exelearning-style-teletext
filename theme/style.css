@@ -1,0 +1,1198 @@
+/*!
+ * eXeTexto — eXeLearning style
+ * ----------------------------
+ * The resource as a teletext service: black screen, the eight teletext colours,
+ * Bedstead (the SAA5050 character generator) and double-height headlines,
+ * numbered pages and the four coloured keys.
+ * Dedicated to the public domain under CC0 1.0.
+ * Bedstead by Ben Harris, public domain (fonts/COPYING.txt).
+ * Icons derived from Google's Material Symbols, Apache License 2.0 (icons/LICENSE.txt).
+ */
+
+@font-face {
+    font-family: "Bedstead";
+    src: url(fonts/bedstead.woff2) format("woff2");
+    font-stretch: 100%;
+    font-display: swap;
+}
+
+/* Half as wide: at twice the size it is teletext's double height. */
+@font-face {
+    font-family: "Bedstead";
+    src: url(fonts/bedstead-ultracondensed.woff2) format("woff2");
+    font-stretch: 50%;
+    font-display: swap;
+}
+
+:root {
+    --tt-black: #000;
+    --tt-red: #f00;
+    --tt-green: #0f0;
+    --tt-yellow: #ff0;
+    --tt-blue: #00f;
+    --tt-magenta: #f0f;
+    --tt-cyan: #0ff;
+    --tt-white: #fff;
+    /* Behind white text: pure red gives 4:1, this 5:1. */
+    --tt-red-key: #e00000;
+    --tt-bezel: #0c0c78;
+    --tt-rule: .1875rem;
+    --tt-font: "Bedstead", "Courier New", monospace;
+}
+
+/* ---------- Content: export and editor ---------- */
+
+.exe-content,
+body#tinymce {
+    --bs-body-color: #fff;
+    --bs-body-bg: #000;
+    --bs-body-font-family: var(--tt-font);
+    --bs-link-color: #0ff;
+    --bs-link-color-rgb: 0, 255, 255;
+    --bs-link-hover-color: #000;
+    --bs-link-hover-color-rgb: 0, 0, 0;
+    --bs-border-color: #00f;
+    --bs-border-radius: 0;
+    --exe-fx-focus-color: #ff0;
+    color-scheme: dark;
+    background: var(--tt-black);
+    color: var(--tt-white);
+    font-family: var(--tt-font);
+    font-size: 1.0625rem;
+    font-synthesis: none;
+    line-height: 1.5;
+}
+
+body.exe-export {
+    margin: 0;
+    background: var(--tt-black);
+    color: var(--tt-white);
+    font-family: var(--tt-font);
+}
+
+.exe-content p,
+.exe-content li {
+    margin: 0 0 .8em;
+}
+
+/* Teletext has no bold or italics: emphasis is colour. */
+.exe-content strong,
+.exe-content b,
+body#tinymce strong {
+    color: var(--tt-yellow);
+    font-weight: inherit;
+}
+
+.exe-content em,
+body#tinymce em {
+    color: var(--tt-cyan);
+    font-style: normal;
+}
+
+.exe-content a,
+body#tinymce a {
+    color: var(--tt-cyan);
+    text-decoration: underline;
+    text-underline-offset: .2em;
+}
+
+.exe-content a:hover {
+    background: var(--tt-cyan);
+    color: var(--tt-black);
+    text-decoration: none;
+}
+
+.exe-content :focus-visible,
+.tt-keys :focus-visible,
+.tt-index :focus-visible {
+    outline: .1875rem solid var(--tt-yellow);
+    outline-offset: .125rem;
+    box-shadow: none;
+}
+
+.exe-content h2,
+.exe-content h3,
+.exe-content h4,
+.exe-content h5,
+.exe-content h6 {
+    margin: 1em 0 .5em;
+    font-family: var(--tt-font);
+    font-weight: normal;
+    line-height: 1.1;
+}
+
+/* Double height: the half-width cut at twice the size. */
+.exe-content h2,
+.exe-content .box-head .box-title,
+.tt-index-title {
+    font-size: 2em;
+    font-stretch: 50%;
+}
+
+.exe-content h2 {
+    color: var(--tt-cyan);
+}
+
+.exe-content h3 {
+    color: var(--tt-yellow);
+    font-size: 1.15em;
+}
+
+.exe-content h4,
+.exe-content h5,
+.exe-content h6 {
+    color: var(--tt-green);
+    font-size: 1em;
+}
+
+.exe-content ul {
+    padding-left: 1.5em;
+    list-style: square;
+}
+
+.exe-content ol {
+    padding-left: 1.75em;
+}
+
+.exe-content ul > li::marker {
+    color: var(--tt-yellow);
+}
+
+.exe-content ol > li::marker {
+    color: var(--tt-cyan);
+}
+
+.exe-content mark {
+    padding: 0 .15em;
+    background: var(--tt-yellow);
+    color: var(--tt-black);
+}
+
+.exe-content hr {
+    margin: 1.5em 0;
+    border: 0;
+    border-top: var(--tt-rule) solid var(--tt-blue);
+    opacity: 1;
+}
+
+.exe-content blockquote {
+    margin: 1em 0;
+    padding: .25em 0 .25em 1em;
+    border-left: var(--tt-rule) solid var(--tt-magenta);
+}
+
+.exe-content pre,
+.exe-content code {
+    color: var(--tt-green);
+    font-family: var(--tt-font);
+}
+
+.exe-content pre {
+    padding: .75em 1em;
+    border: var(--tt-rule) solid var(--tt-green);
+    background: var(--tt-black);
+}
+
+.exe-content img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Illustrations: a blue frame, a cyan caption; beside the text on wide screens. */
+.exe-content figure {
+    margin: .25em 0 1em;
+    text-align: center;
+}
+
+.exe-content .exe-text-activity figure img {
+    display: block;
+    width: 100%;
+    border: var(--tt-rule) solid var(--tt-blue);
+}
+
+.exe-content figcaption {
+    margin-top: .4em;
+    color: var(--tt-cyan);
+    font-size: .875em;
+}
+
+.exe-content .exe-text-activity {
+    container-type: inline-size;
+}
+
+.exe-content .exe-text-activity figure {
+    max-width: 24rem;
+    margin-inline: auto;
+}
+
+@container (min-width: 34rem) {
+    .exe-content .exe-text-activity figure {
+        float: right;
+        width: min(45%, 22rem);
+        margin: .25em 0 1em 1.5em;
+    }
+}
+
+.exe-content .clearfix {
+    clear: both;
+}
+
+/* Tables: blue rules, blue header. */
+.exe-content table,
+.exe-content .exe-table {
+    width: 100%;
+    margin: 1em 0;
+    border: var(--tt-rule) solid var(--tt-blue);
+    border-collapse: collapse;
+}
+
+.exe-content table tr,
+.exe-content table th,
+.exe-content table td,
+.exe-content .exe-table tr:nth-child(n) td,
+.exe-content .exe-table tbody tr:nth-child(n) th {
+    border: var(--tt-rule) solid var(--tt-blue);
+    padding: .35em .6em;
+    background: var(--tt-black);
+    color: var(--tt-white);
+    text-align: start;
+    vertical-align: top;
+}
+
+.exe-content table thead,
+.exe-content table thead :is(th, td),
+.exe-content .exe-table tbody tr:nth-child(n) th {
+    background: var(--tt-blue);
+    color: var(--tt-white);
+    font-weight: normal;
+}
+
+.exe-content table caption {
+    padding: 0 0 .4em;
+    color: var(--tt-cyan);
+    font-style: normal;
+    text-align: start;
+    caption-side: top;
+}
+
+/* eXeLearning's coloured blocks become teletext panels. */
+.exe-content :is(.exe-block-info, .exe-block-warning, .exe-block-alert, .exe-block-danger, .exe-block-success) {
+    padding: .75em 1em;
+    border: var(--tt-rule) solid var(--tt-cyan);
+    border-radius: 0;
+    background: var(--tt-black);
+    color: var(--tt-white);
+}
+
+.exe-content :is(.exe-block-warning, .exe-block-alert) {
+    border-color: var(--tt-yellow);
+}
+
+.exe-content .exe-block-danger {
+    border-color: var(--tt-red);
+}
+
+.exe-content .exe-block-success {
+    border-color: var(--tt-green);
+}
+
+/* ---------- iDevice boxes ---------- */
+
+.exe-content .box {
+    position: relative;
+    margin: 0 0 1.75rem;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: none;
+}
+
+.exe-content .box-head {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    min-height: 0;
+    margin: 0 0 .75rem;
+    padding: 0 2.5rem 0 0;
+    border: 0;
+    background: none;
+}
+
+.exe-content .box-head .box-title {
+    margin: 0;
+    padding: 0;
+    color: var(--tt-cyan);
+    font-family: var(--tt-font);
+    font-weight: normal;
+    line-height: 1.05;
+}
+
+.exe-content .box-icon {
+    display: flex;
+    flex: 0 0 auto;
+    margin: 0;
+}
+
+/* The pixel icons are 18 cells: two screen pixels per cell. */
+.exe-content .box-icon img,
+.exe-content .box-icon .exe-material-icon {
+    display: block;
+    width: 2.25rem;
+    height: 2.25rem;
+    margin: 0;
+}
+
+.exe-content .box-icon .exe-material-icon {
+    background-color: currentColor;
+    -webkit-mask: var(--exe-material-icon-url) center / contain no-repeat;
+    mask: var(--exe-material-icon-url) center / contain no-repeat;
+}
+
+.exe-content .box-content {
+    padding: 0;
+    border: 0;
+    background: none;
+}
+
+.exe-content .box-toggle {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    width: 2rem;
+    height: 2rem;
+    margin-top: -1rem;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font: 1.5rem/2rem var(--tt-font);
+    text-align: center;
+    cursor: pointer;
+}
+
+.exe-content .box-toggle::before {
+    content: "-";
+}
+
+.exe-content .box.minimized .box-toggle::before {
+    content: "+";
+}
+
+.exe-content .box-toggle span,
+#packageLicense .license-label,
+.exe-content .sr-av {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    clip: rect(0, 0, 0, 0) !important;
+    white-space: nowrap !important;
+}
+
+/*
+ * Panels: activities get a yellow frame; any box can choose its colour with
+ * tt-red, tt-green, tt-yellow, tt-blue, tt-magenta, tt-cyan or tt-white.
+ */
+.exe-content .box:where(.tt-red, .tt-green, .tt-yellow, .tt-blue, .tt-magenta, .tt-cyan, .tt-white, :has(.idevice_node:not(.text, .download-source-file))) {
+    --tt-panel: var(--tt-yellow);
+    --tt-ink: var(--tt-black);
+    border: var(--tt-rule) solid var(--tt-panel);
+}
+
+.exe-content .box.tt-red { --tt-panel: var(--tt-red-key); --tt-ink: var(--tt-white); }
+.exe-content .box.tt-green { --tt-panel: var(--tt-green); }
+.exe-content .box.tt-yellow { --tt-panel: var(--tt-yellow); }
+.exe-content .box.tt-blue { --tt-panel: var(--tt-blue); --tt-ink: var(--tt-white); }
+.exe-content .box.tt-magenta { --tt-panel: var(--tt-magenta); }
+.exe-content .box.tt-cyan { --tt-panel: var(--tt-cyan); }
+.exe-content .box.tt-white { --tt-panel: var(--tt-white); }
+
+.exe-content .box:where(.tt-red, .tt-green, .tt-yellow, .tt-blue, .tt-magenta, .tt-cyan, .tt-white, :has(.idevice_node:not(.text, .download-source-file))) > .box-head {
+    margin: 0;
+    padding: .3rem 2.75rem .3rem .4rem;
+    background: var(--tt-panel);
+    color: var(--tt-ink);
+}
+
+.exe-content .box:where(.tt-red, .tt-green, .tt-yellow, .tt-blue, .tt-magenta, .tt-cyan, .tt-white, :has(.idevice_node:not(.text, .download-source-file))) > .box-head .box-title {
+    color: var(--tt-ink);
+}
+
+.exe-content .box:where(.tt-red, .tt-green, .tt-yellow, .tt-blue, .tt-magenta, .tt-cyan, .tt-white, :has(.idevice_node:not(.text, .download-source-file))) > .box-head .box-toggle {
+    right: .375rem;
+}
+
+.exe-content .box:where(.tt-red, .tt-green, .tt-yellow, .tt-blue, .tt-magenta, .tt-cyan, .tt-white, :has(.idevice_node:not(.text, .download-source-file))) > .box-content {
+    padding: 1rem 1rem .25rem;
+}
+
+.exe-content .box.no-header > .box-content {
+    padding-top: 1rem;
+}
+
+/* ---------- Activities ---------- */
+
+.exe-content .btn,
+.exe-content input[type="button"],
+.exe-content input[type="submit"],
+.exe-content input[type="reset"],
+.exe-content .iDevice_buttons button {
+    --bs-btn-color: #000;
+    --bs-btn-bg: #0f0;
+    --bs-btn-border-color: #0f0;
+    --bs-btn-hover-color: #000;
+    --bs-btn-hover-bg: #fff;
+    --bs-btn-hover-border-color: #fff;
+    --bs-btn-active-color: #000;
+    --bs-btn-active-bg: #fff;
+    --bs-btn-active-border-color: #fff;
+    --bs-btn-disabled-color: #000;
+    --bs-btn-disabled-bg: #0f0;
+    --bs-btn-disabled-border-color: #0f0;
+    --bs-btn-border-radius: 0;
+    --bs-btn-font-family: var(--tt-font);
+    --bs-btn-font-weight: normal;
+    --bs-btn-focus-box-shadow: none;
+    min-height: 2.5rem;
+    padding: .4rem 1.25rem;
+    border: 0;
+    border-radius: 0;
+    background: var(--tt-green);
+    color: var(--tt-black);
+    font: 1em/1.3 var(--tt-font);
+    box-shadow: none;
+    cursor: pointer;
+}
+
+.exe-content .btn:hover,
+.exe-content input:is([type="button"], [type="submit"], [type="reset"]):hover,
+.exe-content .iDevice_buttons button:hover {
+    background: var(--tt-white);
+    color: var(--tt-black);
+}
+
+.exe-content .exe-download-package-link a {
+    display: inline-block;
+    padding: .5rem 1.25rem;
+    border-radius: 0;
+    font-family: var(--tt-font);
+    text-decoration: none;
+}
+
+.exe-content input:is([type="text"], [type="number"], [type="search"], [type="email"], [type="url"]),
+.exe-content textarea,
+.exe-content select {
+    padding: .3rem .5rem;
+    border: .125rem solid var(--tt-cyan);
+    border-radius: 0;
+    background: var(--tt-black);
+    color: var(--tt-white);
+    font: 1em/1.3 var(--tt-font);
+}
+
+.exe-content input[type="radio"],
+.exe-content input[type="checkbox"] {
+    width: 1.1em;
+    height: 1.1em;
+    accent-color: var(--tt-yellow);
+    vertical-align: -.15em;
+}
+
+/* True or false */
+.exe-content .TOFP-QuestionDiv,
+.exe-content .TOFP-QuestionDivBlack {
+    margin: 0 0 .75em;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+}
+
+.exe-content .TOFP-GameContainer {
+    min-height: 0;
+}
+
+.exe-content .TOFP-Answers {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .25em 1.5em;
+}
+
+.exe-content .TOFP-Answer label {
+    cursor: pointer;
+}
+
+.exe-content :is(.TOFP-Feedback, .TOFP-Suggestion) {
+    margin: .5em 0;
+    padding: .5em .75em;
+    border: .125rem solid var(--tt-cyan);
+    border-radius: 0;
+    background: var(--tt-black);
+    color: var(--tt-white);
+}
+
+/* The iDevice paints its feedback light green or pink: a green or red frame instead. */
+.exe-content .TOFP-Feedback[style*="212, 237, 218"] {
+    border-color: var(--tt-green);
+    background: var(--tt-black) !important;
+    color: var(--tt-white) !important;
+}
+
+.exe-content .TOFP-Feedback[style*="248, 215, 218"] {
+    border-color: var(--tt-red);
+    background: var(--tt-black) !important;
+    color: var(--tt-white) !important;
+}
+
+.exe-content .TOFP-ShowSuggestion {
+    color: var(--tt-cyan);
+}
+
+.exe-content .TOFP-CheckTestDiv {
+    margin: .5em 0 .75em;
+}
+
+.exe-content .TOFP-CheckTest {
+    margin: 0;
+}
+
+/* Sorting: cyan rows and teletext arrows. */
+.exe-content .exe-sortableList-options {
+    padding-left: 0;
+    list-style: none;
+}
+
+.exe-content .exe-sortableList-options li {
+    padding: .5em 4.5em .5em .75em;
+    border: .125rem solid var(--tt-cyan);
+    border-radius: 0;
+    background: var(--tt-black);
+    color: var(--tt-white);
+    box-shadow: none;
+}
+
+.exe-content .exe-sortableList-options li[draggable="true"]:hover {
+    border-color: var(--tt-yellow);
+}
+
+.exe-content .exe-sortableList li a {
+    width: 1.5em;
+    height: 1.5em;
+    margin-top: -.75em;
+    right: 2.25em;
+    background: none;
+    color: var(--tt-cyan);
+    font: 1em/1.5em var(--tt-font);
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.exe-content .exe-sortableList li a.down {
+    right: .5em;
+}
+
+.exe-content .exe-sortableList li a::before {
+    content: "▲";
+    display: block;
+}
+
+.exe-content .exe-sortableList li a.down::before {
+    content: "▼";
+}
+
+.exe-content .exe-sortableList li a:is(:hover, :focus) {
+    background: var(--tt-cyan);
+    color: var(--tt-black);
+}
+
+/* Licence and "made with eXeLearning" */
+#packageLicense {
+    color: var(--tt-white);
+}
+
+#packageLicense p {
+    margin: 0;
+}
+
+#packageLicense.propietary {
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    height: 0;
+}
+
+/* ---------- The page as a document: no JavaScript, and the content's frame ---------- */
+
+.exe-web-site .exe-content {
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 1.5rem 1rem 2rem;
+}
+
+.exe-content .page-title {
+    margin: 0 0 1rem;
+    padding: 0 0 .35rem;
+    border-bottom: var(--tt-rule) solid var(--tt-yellow);
+    color: var(--tt-yellow);
+    font-family: var(--tt-font);
+    font-size: 2em;
+    font-weight: normal;
+    line-height: 1.05;
+}
+
+.exe-content .package-title {
+    margin: 0 0 .5rem;
+    color: var(--tt-cyan);
+    font-size: 1em;
+}
+
+.exe-web-site .page-counter {
+    float: right;
+    margin: 0;
+    color: var(--tt-cyan);
+}
+
+.exe-web-site #siteNav ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.exe-web-site #siteNav li {
+    margin: 0;
+}
+
+.exe-web-site #siteNav .other-section {
+    display: block;
+}
+
+.exe-web-site #siteNav a {
+    display: flex;
+    gap: 1.5ch;
+    padding: .2rem .5rem;
+    color: var(--tt-white);
+    text-decoration: none;
+}
+
+.exe-web-site #siteNav a:hover {
+    background: var(--tt-cyan);
+    color: var(--tt-black);
+}
+
+.exe-web-site #siteNav a.active {
+    background: var(--tt-yellow);
+    color: var(--tt-black);
+}
+
+.exe-web-site #siteNav .tt-number {
+    flex: 0 0 auto;
+}
+
+.exe-web-site main.page {
+    margin: 1.5rem 0;
+}
+
+.exe-web-site .nav-buttons {
+    display: flex;
+    justify-content: space-between;
+    margin: 1.5rem 0;
+}
+
+.exe-web-site .nav-buttons span.nav-button {
+    visibility: hidden;
+}
+
+.exe-web-site #siteFooter {
+    padding-top: .75rem;
+    border-top: var(--tt-rule) solid var(--tt-blue);
+}
+
+#made-with-eXe {
+    position: static;
+    margin: 0;
+}
+
+#made-with-eXe a {
+    display: inline;
+    width: auto;
+    height: auto;
+    padding: 0;
+    background: none;
+    box-shadow: none;
+    color: var(--tt-cyan);
+    font: inherit;
+    opacity: 1;
+}
+
+#made-with-eXe span {
+    padding: 0;
+}
+
+#skipNav {
+    top: -10rem;
+    z-index: 50;
+    padding: .5rem 1rem;
+    background: var(--tt-yellow);
+    color: var(--tt-black);
+    font-family: var(--tt-font);
+}
+
+#skipNav:focus {
+    top: .5rem;
+}
+
+#exe-client-search-results-list ul {
+    padding-left: 0;
+    list-style: none;
+}
+
+#exe-client-search-results-list li {
+    margin-bottom: 1em;
+}
+
+/* ---------- The teletext screen: built by style.js ---------- */
+
+.tt-js body.exe-web-site {
+    background: var(--tt-bezel);
+}
+
+.tt-js .exe-web-site .exe-content {
+    display: flex;
+    flex-direction: column;
+    max-width: none;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.tt-js .exe-web-site .exe-content > * {
+    min-width: 0;
+}
+
+/* Header row: page entry, service, page, date and clock. */
+.tt-status {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 1.5ch;
+    padding: .5rem 1rem .25rem;
+    color: var(--tt-white);
+    font-size: .9375rem;
+    white-space: nowrap;
+}
+
+.tt-entry {
+    min-width: 4ch;
+}
+
+.tt-entry-typing {
+    color: var(--tt-yellow);
+}
+
+.tt-entry-missing {
+    color: var(--tt-red);
+}
+
+.tt-service {
+    color: var(--tt-cyan);
+}
+
+.tt-date {
+    margin-left: auto;
+}
+
+.tt-clock {
+    color: var(--tt-yellow);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .tt-entry-typing {
+        animation: tt-flash 1s steps(1) infinite;
+    }
+}
+
+@keyframes tt-flash {
+    50% { opacity: 0; }
+}
+
+/* Banner: the title on blue, the page number and the counter. */
+.tt-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: .5rem 1rem;
+    background: var(--tt-blue);
+    color: var(--tt-white);
+}
+
+.tt-banner .package-header {
+    margin: 0;
+}
+
+.tt-banner .package-title {
+    margin: 0;
+    color: var(--tt-white);
+    font-size: 2.2rem;
+    font-stretch: 50%;
+    line-height: 1.05;
+}
+
+.tt-banner-page {
+    flex: 0 0 auto;
+    text-align: right;
+    line-height: 1.05;
+}
+
+.tt-banner-number {
+    display: block;
+    font-size: 2.2rem;
+    font-stretch: 50%;
+}
+
+.tt-banner .page-counter {
+    float: none;
+    margin: 0;
+    color: var(--tt-cyan);
+    font-size: 1rem;
+}
+
+.tt-banner .page-counter strong {
+    color: inherit;
+}
+
+.tt-banner .page-counter-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+}
+
+.tt-js .exe-web-site main.page {
+    flex: 1 0 auto;
+    margin: 0;
+    padding: 1.25rem 1rem 1.5rem;
+}
+
+.tt-js .exe-web-site .main-header {
+    margin: 0 0 1.25rem;
+}
+
+.tt-page-number {
+    white-space: nowrap;
+}
+
+.tt-js #exe-client-search-results {
+    margin-bottom: 1.5rem;
+}
+
+/* The numbered index: a column on wide screens, opened with the green key on phones. */
+.tt-index {
+    padding: 1.25rem 1rem;
+    background: var(--tt-black);
+}
+
+.tt-index-title {
+    margin: 0 0 .75rem;
+    padding-bottom: .3rem;
+    border-bottom: var(--tt-rule) solid var(--tt-cyan);
+    color: var(--tt-cyan);
+    line-height: 1.05;
+}
+
+.tt-index #siteNav {
+    margin: 0 -.5rem;
+}
+
+.tt-index #exe-client-search-form {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: var(--tt-rule) solid var(--tt-cyan);
+}
+
+.tt-index #exe-client-search-form p {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+    margin: 0;
+}
+
+.tt-index #exe-client-search-text {
+    flex: 1 1 8rem;
+    min-width: 0;
+    padding: .3rem .5rem;
+    border: .125rem solid var(--tt-cyan);
+    border-radius: 0;
+    background: var(--tt-black);
+    color: var(--tt-white);
+    font: 1rem/1.3 var(--tt-font);
+}
+
+.tt-index #exe-client-search-submit {
+    padding: .3rem .75rem;
+    border: 0;
+    border-radius: 0;
+    background: var(--tt-green);
+    color: var(--tt-black);
+    font: 1rem/1.3 var(--tt-font);
+    cursor: pointer;
+}
+
+.tt-index #exe-client-search-reset {
+    width: auto;
+    height: auto;
+    padding: .3rem .5rem;
+    background: var(--tt-red-key);
+    color: var(--tt-white);
+    font: 1rem/1.3 var(--tt-font);
+    text-decoration: none;
+}
+
+.tt-index #exe-client-search-reset span {
+    position: static;
+    width: auto;
+    height: auto;
+    clip: auto;
+}
+
+/* Boxes marked tt-side, beside the content on wide screens. */
+.tt-aside > .box:last-child,
+.tt-js .page-content > .box:last-child {
+    margin-bottom: 0;
+}
+
+body:has(#exe-client-search-reset.visible) .tt-aside {
+    display: none;
+}
+
+/* The coloured keys */
+.tt-keys {
+    position: sticky;
+    bottom: 0;
+    z-index: 20;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: .375rem;
+    padding: .375rem;
+    background: var(--tt-black);
+}
+
+.tt-key {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1ch;
+    min-height: 2.75rem;
+    padding: .25rem .5rem;
+    border: 0;
+    border-radius: 0;
+    font: 1.125rem/1.1 var(--tt-font);
+    text-align: center;
+    text-decoration: none !important;
+    cursor: pointer;
+}
+
+.tt-key-red { background: var(--tt-red-key); color: var(--tt-white) !important; }
+.tt-key-green { background: var(--tt-green); color: var(--tt-black) !important; }
+.tt-key-yellow { background: var(--tt-yellow); color: var(--tt-black) !important; }
+.tt-key-blue { background: var(--tt-blue); color: var(--tt-white) !important; }
+
+.tt-key-red::before { content: "◀"; }
+.tt-key-blue::after { content: "▶"; }
+
+a.tt-key:hover,
+button.tt-key:hover {
+    background: var(--tt-white);
+    color: var(--tt-black) !important;
+}
+
+.tt-key:focus-visible {
+    outline: .1875rem solid var(--tt-white);
+    outline-offset: .125rem;
+}
+
+.tt-key[aria-disabled="true"] {
+    opacity: .35;
+    cursor: default;
+}
+
+.tt-key .tt-key-label {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* Bottom row: licence and eXeLearning. */
+.tt-footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: .25rem 2rem;
+    padding: .5rem 1rem .75rem;
+    background: var(--tt-bezel);
+    color: var(--tt-white);
+    font-size: .8125rem;
+}
+
+.tt-js .exe-web-site #siteFooter {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+/* Phones: the index covers the page above the keys. */
+@media screen and (max-width: 59.99rem) {
+    .tt-js .exe-web-site .exe-content {
+        font-size: 1rem;
+    }
+
+    .tt-js .tt-index {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 3.5rem;
+        left: 0;
+        z-index: 30;
+        display: none;
+        overflow: auto;
+        border-bottom: var(--tt-rule) solid var(--tt-green);
+    }
+
+    .tt-js .tt-index-open .tt-index {
+        display: block;
+    }
+
+    .tt-js .exe-web-site .page-title {
+        font-stretch: 50%;
+    }
+
+    .tt-banner .package-title,
+    .tt-banner-number {
+        font-size: 1.75rem;
+    }
+
+    .tt-keys {
+        grid-template-columns: 1fr 2fr 2fr 1fr;
+    }
+
+    .tt-key {
+        font-size: 1rem;
+    }
+
+    .tt-key-red .tt-key-label,
+    .tt-key-blue .tt-key-label {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+    }
+}
+
+/* Wide screens: index | page, with the side column beside the content. */
+@media screen and (min-width: 60rem) {
+    .tt-js body.exe-web-site {
+        padding: 1.25rem 1.5rem 0;
+    }
+
+    .tt-js .exe-web-site .exe-content {
+        display: grid;
+        grid-template-columns: minmax(14rem, 18rem) minmax(0, 1fr);
+        grid-template-rows: auto auto 1fr auto auto;
+        grid-template-areas:
+            "status status"
+            "banner banner"
+            "index  main"
+            "keys   keys"
+            "footer footer";
+        max-width: 92rem;
+        min-height: calc(100vh - 1.25rem);
+        margin: 0 auto;
+    }
+
+    .tt-status { grid-area: status; padding-inline: 1.5rem; }
+    .tt-banner { grid-area: banner; padding: .75rem 1.5rem; }
+    .tt-index { grid-area: index; border-right: var(--tt-rule) solid var(--tt-blue); }
+    .tt-js .exe-web-site main.page { grid-area: main; padding: 1.5rem 2rem 2rem; }
+    .tt-keys { grid-area: keys; }
+    .tt-footer { grid-area: footer; padding-inline: 0; }
+
+    .tt-banner .package-title,
+    .tt-banner-number {
+        font-size: 2.75rem;
+        font-stretch: 100%;
+    }
+
+    .tt-js .exe-web-site main.tt-has-aside {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(16rem, 24rem);
+        align-content: start;
+        column-gap: 2rem;
+    }
+
+    main.tt-has-aside > * {
+        grid-column: 1 / -1;
+    }
+
+    main.tt-has-aside > .page-content {
+        grid-column: 1;
+    }
+
+    main.tt-has-aside > .tt-aside {
+        grid-column: 2;
+    }
+}
+
+/* ---------- Editor ---------- */
+
+#workarea .box-head .box-title,
+#workarea .box-head .content-editable-title :is(h1, [contenteditable="true"]) {
+    color: inherit !important;
+    font-family: var(--tt-font) !important;
+    font-weight: normal !important;
+}
+
+#workarea .box-head :is(.btn-edit-title, .box_actions .btn-action-menu, .exe-actions-menu > button) .small-icon {
+    filter: invert(1) !important;
+}
+
+#workarea .box-head .dropdown-menu {
+    z-index: 2000 !important;
+}
+
+#workarea .box-head .dropdown-menu .small-icon {
+    filter: none !important;
+}
+
+/* ---------- Print: dark text on white paper ---------- */
+
+@media print {
+    .tt-status,
+    .tt-keys,
+    .tt-index,
+    .exe-content .box-toggle,
+    .exe-web-site .nav-buttons,
+    .exe-web-site #siteNav {
+        display: none !important;
+    }
+
+    body.exe-export,
+    .exe-content,
+    .tt-banner,
+    .tt-footer {
+        background: #fff !important;
+        color: #000 !important;
+    }
+
+    .exe-content :is(strong, em, a, h2, h3, h4, figcaption, .page-title, .box-title, .package-title),
+    .tt-banner .page-counter {
+        color: #000 !important;
+    }
+
+    .tt-js .exe-web-site .exe-content {
+        display: block;
+        min-height: 0;
+    }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<theme>
+  <name>teletext</name>
+  <title>eXeTexto</title>
+  <version>1.0.0</version>
+  <compatibility>4.0.5</compatibility>
+  <author>Área de Tecnología Educativa · Gobierno de Canarias</author>
+  <license>Creative Commons CC0 1.0 Universal</license>
+  <license-url>https://creativecommons.org/publicdomain/zero/1.0/</license-url>
+  <description>El recurso como un servicio de teletexto: fondo negro, los ocho colores del teletexto, la tipografía Bedstead y titulares a doble altura. Cada página recibe un número (100, 200, 210…) y se puede ir a ella escribiendo sus tres cifras. La fila de cabecera muestra la página, la fecha y la hora; el índice numerado acompaña al contenido y las teclas de colores llevan a la página anterior (roja), al índice (verde), a las actividades (amarilla) y a la siguiente (azul), también con ← y →. Las actividades se enmarcan en amarillo y las cajas admiten las clases tt-red, tt-green, tt-yellow, tt-blue, tt-magenta, tt-cyan y tt-white para colorear el panel, y tt-side para llevarlo a la columna lateral. En el móvil el índice se abre con la tecla verde; sin JavaScript o al imprimir, el contenido se lee como una página normal.
+
+Tipografía Bedstead (Ben Harris, https://fontlibrary.org/es/font/bedstead), de dominio público (CC0 1.0, fonts/COPYING.txt). Iconos de iDevices pixelados a partir de los Material Symbols de Google del estilo Zen de eXeLearning, bajo la Apache License 2.0 (https://www.apache.org/licenses/LICENSE-2.0); el texto completo está en icons/LICENSE.txt.</description>
+  <downloadable>1</downloadable>
+</theme>
